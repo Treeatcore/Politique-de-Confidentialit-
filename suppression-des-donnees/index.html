@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Suppression des données — Astro Voyance Treeatcore</title>
+  <style>
+    :root{
+      --bg:#0b0f17;
+      --card:#111827;
+      --text:#e5e7eb;
+      --muted:#9ca3af;
+      --line:rgba(255,255,255,.10);
+      --accent:#60a5fa;
+      --accent2:#34d399;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(1200px 600px at 10% 0%, rgba(96,165,250,.18), transparent 55%),
+                  radial-gradient(900px 500px at 100% 10%, rgba(52,211,153,.14), transparent 50%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.6;
+      -webkit-text-size-adjust: 100%;
+      text-rendering: optimizeLegibility;
+    }
+    .wrap{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 28px 16px 64px;
+    }
+    header{
+      padding: 18px 18px 14px;
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(17,24,39,.85), rgba(17,24,39,.55));
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+    }
+    h1{
+      margin:0 0 6px;
+      font-size: clamp(24px, 2.6vw, 34px);
+      letter-spacing:.2px;
+      overflow-wrap:anywhere;
+    }
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size: 14px;
+      overflow-wrap:anywhere;
+    }
+    .badge-row{
+      margin-top: 10px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+    .badge{
+      font-size: 12px;
+      color: rgba(255,255,255,.92);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.06);
+      padding: 6px 10px;
+      border-radius: 999px;
+      max-width: 100%;
+      overflow-wrap:anywhere;
+    }
+    main{
+      margin-top: 16px;
+      display: grid;
+      gap: 14px;
+    }
+    section{
+      border:1px solid var(--line);
+      background: rgba(17,24,39,.55);
+      border-radius: 16px;
+      padding: 16px 18px;
+      box-shadow: 0 8px 22px rgba(0,0,0,.22);
+      overflow:hidden;
+    }
+    h2{
+      margin: 0 0 10px;
+      font-size: 18px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      overflow-wrap:anywhere;
+    }
+    .dot{
+      width:10px;height:10px;border-radius:999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 0 3px rgba(96,165,250,.12);
+      flex:0 0 auto;
+    }
+    h3{
+      margin: 14px 0 8px;
+      font-size: 15px;
+      color: rgba(255,255,255,.95);
+      overflow-wrap:anywhere;
+    }
+    p{
+      margin: 8px 0;
+      color: rgba(229,231,235,.95);
+      overflow-wrap:anywhere;
+    }
+    ul{
+      margin: 8px 0 0;
+      padding-left: 18px;
+      color: rgba(229,231,235,.95);
+    }
+    li{
+      margin: 6px 0;
+      overflow-wrap:anywhere;
+    }
+    a{
+      color: var(--accent);
+      text-decoration: none;
+      overflow-wrap:anywhere;
+      word-break: break-word;
+    }
+    a:hover{text-decoration: underline}
+    .callout{
+      border:1px solid rgba(96,165,250,.25);
+      background: rgba(96,165,250,.10);
+      padding: 12px 12px;
+      border-radius: 14px;
+      color: rgba(255,255,255,.95);
+      margin-top: 10px;
+      overflow-wrap:anywhere;
+    }
+    .callout strong{color: rgba(255,255,255,.98)}
+    .steps{
+      margin: 10px 0 0;
+      padding-left: 18px;
+    }
+    .steps li{
+      margin: 8px 0;
+    }
+    .table-wrap{
+      width:100%;
+      overflow-x:auto;
+      -webkit-overflow-scrolling: touch;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      margin-top: 10px;
+      background: rgba(255,255,255,.02);
+    }
+    .table{
+      width:100%;
+      border-collapse: collapse;
+      min-width: 820px;
+    }
+    .table th, .table td{
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+      text-align:left;
+      font-size: 14px;
+      overflow-wrap:anywhere;
+    }
+    .table th{
+      color: rgba(255,255,255,.92);
+      background: rgba(255,255,255,.06);
+      font-weight: 600;
+    }
+    .table tr:last-child td{border-bottom:none}
+    code{
+      background: rgba(255,255,255,.08);
+      border:1px solid var(--line);
+      padding: 2px 6px;
+      border-radius: 8px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 12px;
+      color: rgba(255,255,255,.92);
+      overflow-wrap:anywhere;
+      word-break: break-word;
+    }
+    footer{
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+      padding-top: 10px;
+      overflow-wrap:anywhere;
+    }
+    .mini{
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .pill{
+      display:inline-block;
+      padding: 2px 10px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.06);
+      border-radius: 999px;
+      font-size: 12px;
+      color: rgba(255,255,255,.92);
+      margin-left: 6px;
+      vertical-align: middle;
+      overflow-wrap:anywhere;
+    }
+
+    @media (max-width: 640px){
+      .wrap{padding: 20px 12px 56px}
+      header{padding: 16px 14px 12px}
+      section{padding: 14px 14px}
+      h2{font-size: 16px}
+      h3{font-size: 14px}
+      .badge-row{gap:6px}
+      .badge{padding: 5px 9px}
+      ul{padding-left: 16px}
+      .table-wrap{border-radius: 12px}
+      .table{min-width: 760px}
+    }
+
+    @media (max-width: 380px){
+      .wrap{padding: 18px 10px 52px}
+      header{border-radius: 14px}
+      section{border-radius: 14px}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Suppression des données</h1>
+      <p class="sub"><strong>Astro Voyance Treeatcore</strong> — Procédure de suppression des données utilisateur</p>
+      <div class="badge-row">
+        <span class="badge">Support par e-mail</span>
+        <span class="badge">Stockage local (AsyncStorage)</span>
+        <span class="badge">Abonnements (RevenueCat + Stores)</span>
+        <span class="badge">Publicités (AdMob)</span>
+      </div>
+    </header>
+
+    <main>
+      <section>
+        <h2><span class="dot"></span>1. Qui est concerné ?</h2>
+        <p>
+          Cette page explique comment demander la suppression des données associées à l’application
+          <strong>Astro Voyance Treeatcore</strong>.
+        </p>
+        <p class="mini">
+          Contact officiel : <a href="mailto:contact.treeatcore@gmail.com">contact.treeatcore@gmail.com</a>
+          <span class="pill">Réponse sous délai raisonnable</span>
+        </p>
+
+        <div class="callout">
+          <strong>À savoir :</strong> l’application ne propose pas de création de compte. Une grande partie des informations
+          liées à l’expérience utilisateur est stockée <strong>localement sur l’appareil</strong> et peut être supprimée
+          directement par l’utilisateur (voir section 3).
+        </div>
+      </section>
+
+      <section>
+        <h2><span class="dot"></span>2. Procédure pour demander la suppression</h2>
+        <h3>2.1 Demande par e-mail</h3>
+        <p>
+          Pour demander la suppression des données que nous pourrions traiter via le support (et, le cas échéant,
+          pour vous aider à supprimer vos données locales), envoyez un e-mail à :
+          <a href="mailto:contact.treeatcore@gmail.com">contact.treeatcore@gmail.com</a>.
+        </p>
+
+        <h3>2.2 Informations à fournir</h3>
+        <ul>
+          <li>Objet conseillé : <code>Suppression des données — Astro Voyance Treeatcore</code></li>
+          <li>Votre adresse e-mail de contact (celle utilisée pour nous écrire)</li>
+          <li>Le modèle de l’appareil et la version d’Android</li>
+          <li>La version de l’application (si disponible)</li>
+          <li>Une description de votre demande (suppression / assistance)</li>
+        </ul>
+
+        <h3>2.3 Vérification minimale</h3>
+        <p>
+          Afin d’éviter toute suppression non autorisée, nous pourrons demander une confirmation depuis
+          la même adresse e-mail que celle utilisée pour la demande.
+        </p>
+
+        <div class="callout">
+          <strong>Important :</strong> les achats et abonnements sont gérés par la plateforme (ex. Google Play).
+          Pour résilier un abonnement : ouvrez Google Play → <strong>Paiements et abonnements</strong> → <strong>Abonnements</strong>.
+        </div>
+      </section>
+
+      <section>
+        <h2><span class="dot"></span>3. Suppression des données stockées sur l’appareil</h2>
+        <h3>3.1 Désinstallation</h3>
+        <p>
+          La méthode la plus simple pour supprimer les données stockées localement (préférences, états, contenu mis en cache)
+          est de <strong>désinstaller</strong> l’application.
+        </p>
+
+        <h3>3.2 Suppression via Android</h3>
+        <p>Vous pouvez également supprimer les données de l’application via les réglages Android :</p>
+        <ol class="steps">
+          <li>Ouvrez <strong>Paramètres</strong> sur votre appareil</li>
+          <li>Allez dans <strong>Applications</strong> → <strong>Astro Voyance Treeatcore</strong></li>
+          <li>Ouvrez <strong>Stockage</strong></li>
+          <li>Appuyez sur <strong>Effacer les données</strong> (et/ou <strong>Vider le cache</strong>)</li>
+        </ol>
+
+        <h3>3.3 Gestion du consentement publicitaire</h3>
+        <p>
+          Si l’application propose un bouton « Gérer le consentement », vous pouvez y modifier vos choix.
+          Vous pouvez aussi réinitialiser l’identifiant publicitaire dans les réglages Android
+          (selon la version et le fabricant).
+        </p>
+      </section>
+
+      <section>
+        <h2><span class="dot"></span>4. Données supprimées ou conservées</h2>
+        <p>
+          Le tableau ci-dessous indique les principaux types de données liés à l’application, la méthode de suppression
+          et les éventuelles durées de conservation.
+        </p>
+
+        <div class="table-wrap" role="region" aria-label="Données et suppression (tableau défilable)" tabindex="0">
+          <table class="table" aria-label="Données et suppression">
+            <thead>
+              <tr>
+                <th>Type de données</th>
+                <th>Exemples</th>
+                <th>Où se trouvent-elles ?</th>
+                <th>Comment les supprimer ?</th>
+                <th>Conservation</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Stockage local</td>
+                <td>Préférences, langue, états d’interface, contenus mis en cache</td>
+                <td>Sur l’appareil (local)</td>
+                <td>Désinstallation ou Paramètres Android → Applications → Stockage → Effacer les données</td>
+                <td>Jusqu’à suppression par l’utilisateur</td>
+              </tr>
+              <tr>
+                <td>Données de support</td>
+                <td>E-mail, contenu du message, informations techniques fournies</td>
+                <td>Boîte mail du support</td>
+                <td>Demande par e-mail à <a href="mailto:contact.treeatcore@gmail.com">contact.treeatcore@gmail.com</a></td>
+                <td>Temps nécessaire au traitement, puis archivage/suppression selon nécessité</td>
+              </tr>
+              <tr>
+                <td>Consentement publicitaire</td>
+                <td>Statut/choix de consentement (ex. chaîne de consentement)</td>
+                <td>SDK/plateforme (selon fonctionnement du module)</td>
+                <td>Modifier via l’application (si option disponible) ou réinitialiser selon les réglages Android/Google</td>
+                <td>Mis à jour lorsque vous changez vos choix</td>
+              </tr>
+              <tr>
+                <td>Publicités (AdMob)</td>
+                <td>Événements pub, signaux anti-fraude, identifiant publicitaire</td>
+                <td>Prestataires publicitaires</td>
+                <td>Gérer le consentement / préférences pub, et options de confidentialité du compte Google</td>
+                <td>Selon politiques du prestataire</td>
+              </tr>
+              <tr>
+                <td>Abonnements (RevenueCat + Stores)</td>
+                <td>Statut d’abonnement, informations d’achat côté store</td>
+                <td>Plateforme (Google Play) et prestataire de gestion</td>
+                <td>Gérer/annuler via Google Play → Paiements et abonnements → Abonnements</td>
+                <td>Selon obligations légales et politiques des prestataires</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout">
+          <strong>Note :</strong> nous ne recevons pas votre numéro de carte bancaire. Les paiements sont traités par la plateforme (ex. Google Play).
+        </div>
+      </section>
+
+      <section>
+        <h2><span class="dot"></span>5. Lien vers la politique de confidentialité</h2>
+        <p>
+          Pour plus de détails sur les données traitées et les services tiers utilisés, consultez la politique de confidentialité :
+          <a href="https://treeatcore.github.io/Politique-de-Confidentialit-/" target="_blank" rel="noopener noreferrer">
+            https://treeatcore.github.io/Politique-de-Confidentialit-/
+          </a>
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      © Astro Voyance Treeatcore — Suppression des données
+    </footer>
+  </div>
+</body>
+</html>
